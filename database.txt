@@ -1,0 +1,7 @@
+149592		Nevsky              		18		BSBO-12-18
+135575		Dmitry              		23		1
+61889		Vasya               		15		7 form
+149061		Alex                		27		1
+149817		Vladimir            		27		2
+149874		Kirill              		18		BSBO-04-18
+178468		Anonymous           		1337		CLAY
