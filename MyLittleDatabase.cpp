@@ -103,6 +103,17 @@ void show(database &db) {
 		it.second.show_all(cout);
 }
 
+string get_yn_answer() {
+	string response;
+	do {
+		getstring(response);
+		tolower(response);
+		if (!(response == "y" || response == "n"))
+			cout << "You must answer \"y\" or \"n\"\n";
+	} while (!(response == "y" || response == "n"));
+	return response;
+}
+
 void save(database &db) {
 	ofstream file_out("database.txt");
 	if (!file_out)
@@ -112,16 +123,9 @@ void save(database &db) {
 			save_to_file(db, file_out);
 		else {
 			cout << "Your file is not empty. Should I wipe it? (y/n) ";
-			string response;
-			do {
-				getstring(response);
-				tolower(response);
-				if (response == "y")
-					save_to_file(db, file_out);
-				else if (response != "n") {
-					cout << "You must answer \"y\" or \"n\"\n";
-				}
-			} while (!(response == "y" || response == "n"));
+			string response = get_yn_answer();
+			if (response == "y")
+				save_to_file(db, file_out);
 		}
 	}
 	file_out.close();
@@ -143,6 +147,21 @@ void wipe(database &db) {
 }
 
 void quit(database &db) {
+	database file;
+	load(file);
+	bool saved = true;
+	for (auto &record : db)
+		if (!file.count(record.first)) {
+			saved = false;
+			break;
+		}
+	if (!saved) {
+		cout << "Some records are not saved!!!\n";
+		cout << "Continue anyway? (y/n) ";
+		string response = get_yn_answer();
+		if (response == "n")
+			return;
+	}
 	cout << "Bye!\n";
 	Sleep(1000);
 	exit(0);
