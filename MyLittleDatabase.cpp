@@ -356,7 +356,8 @@ int main() {
 		{"find", &find}, {"delete", &erase}, {"correct", &correct},
 		{"sort", &show_sorted} };
 	string query = "None";
-	cout << "Print \"quit\" to terminate the program\n";
+	cout << "Print \"exit\" to terminate the program\n";
+	cout << "Type \"help\" to see the list of available commands\n";
 	while (true) {
 		printf("Enter your command:\n");
 		getstring(query);
